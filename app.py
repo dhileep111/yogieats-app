@@ -15,38 +15,45 @@ if not api_key:
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.5-flash')
 
-# 2. Modern trend UI (Immersive & Wide)
+# 2. Match the YogiEats Design Trend
 st.set_page_config(page_title="YogiEats AI", page_icon="🧘", layout="wide")
 
-st.markdown("""
+st.markdown(f"""
     <style>
-    /* Force the app to use the full width of your GitHub site container */
-    .block-container {
-        max-width: 100% !important;
-        padding: 1rem 2rem !important;
-    }
+    /* Use your site's fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+    .stApp {{
+        background-color: transparent;
+    }}
     
-    /* Clean white background */
-    .stApp { background-color: #ffffff; }
+    h1, h2, h3 {{
+        font-family: 'Playfair Display', serif !important;
+        color: #242424 !important; /* Your e-global-color-primary */
+    }}
 
-    /* Modern centered inputs */
-    div[data-baseweb="select"] > div, div[data-baseweb="input"] > div {
-        border-radius: 15px;
-        border: 1px solid #e0e0e0;
-    }
+    p, div, span, label {{
+        font-family: 'Karla', sans-serif !important;
+        color: #6b6b6b !important; /* Your e-global-color-text */
+    }}
 
-    /* Siddha Orange Button */
-    .stButton button {
-        width: 100%;
-        border-radius: 50px;
-        background-color: #ff8c00 !important;
+    /* Match your 'Get Started' button style */
+    .stButton>button {{
+        background-color: #ff8c00 !important; /* Your Siddha Orange */
         color: white !important;
-        font-weight: bold;
-        height: 3.5rem;
-    }
+        border-radius: 35px 0px 35px 0px !important; /* Your unique button shape */
+        border: none !important;
+        font-size: 22px !important;
+        padding: 15px 40px !important;
+        transition: 0.3s !important;
+    }}
+
+    .stButton>button:hover {{
+        transform: translateY(-5px) !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }}
     </style>
     """, unsafe_allow_html=True)
-
 # 3. User Interface
 st.title("🧘 Siddha Diet AI")
 st.write("Professional nutrition advice tailored to your practice.")
