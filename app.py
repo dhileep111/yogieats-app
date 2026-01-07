@@ -15,57 +15,48 @@ if not api_key or api_key == "AIzaSyAcYinj66KegJuvK14jCa1BEz2y_WdY5mU":
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.5-flash')
 
-# 2. Website UI with Custom CSS Injection
-st.set_page_config(page_title="YogiEats AI", page_icon="🧘", layout="centered")
+# 2. Modern UI with "Glassmorphism" Style
+st.set_page_config(page_title="YogiEats AI", page_icon="🧘", layout="wide") # 'wide' uses the full screen
 
-# This "injects" your website's CSS style into the AI tool
 st.markdown("""
     <style>
-    /* Main Background */
+    /* Remove the 'padding' at the top of the page */
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    /* Make the background perfectly match your GitHub site */
     .stApp {
-        background-color: #ffffff;
-    }
-    
-    /* Change Headers to match your site's font style */
-    h1, h2, h3 {
-        color: #2e4a3d !important; /* Deep Yoga Green */
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background-color: transparent;
     }
 
-    /* Customize the 'Generate' Button to look like your site buttons */
-    div.stButton > button:first-child {
-        background-color: #ff8c00; /* Siddha Orange */
-        color: white;
-        border-radius: 20px;
-        border: none;
-        padding: 10px 24px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    
-    div.stButton > button:first-child:hover {
-        background-color: #e67e00;
-        border: none;
-        color: white;
+    /* Style the input fields to be modern and 'clean' */
+    div[data-baseweb="select"] > div {
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
     }
 
-    /* Style the Sidebar to be cleaner */
-    [data-testid="stSidebar"] {
-        background-color: #f8f9fa;
-        border-right: 1px solid #eee;
-    }
-    
-    /* Style the output cards */
+    /* MODERN TREND: Use a centered card for the output */
     .stMarkdown {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #444;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
     }
     </style>
     """, unsafe_allow_html=True)
 
+# Move your inputs to the main page instead of the sidebar for a "Chat" vibe
 st.title("🧘 Siddha Diet AI")
-st.subheader("Personalized Nutrition for the Modern Yogi")
+col1, col2 = st.columns(2)
+with col1:
+    age = st.number_input("Age", min_value=18, max_value=100, value=26)
+    body_type = st.selectbox("Body Type (Dosha)", ["Vata (Air/Space)", "Pitta (Fire/Water)", "Kapha (Earth/Water)", "Not Sure"])
+with col2:
+    goal = st.selectbox("Primary Goal", ["Mental Clarity", "Physical Strength", "Weight Balance", "Better Sleep"])
+    practitioner = st.toggle("Regular Yoga Practitioner?")
 
 # 3. User Inputs
 with st.sidebar:
@@ -99,3 +90,4 @@ if st.button("Generate My Siddha Plan"):
     else:
 
         st.error("API Key is missing. Go to Streamlit Settings > Secrets and add GEMINI_API_KEY.")
+
