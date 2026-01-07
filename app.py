@@ -4,11 +4,11 @@ import google.generativeai as genai
 # 1. Setup Gemini API - Security Fix
 # Use 'GEMINI_API_KEY' as the name in your Streamlit Secrets dashboard
 try:
-    api_key = st.secrets["GEMINI_API_KEY"]
+    api_key = st.secrets["AIzaSyAcYinj66KegJuvK14jCa1BEz2y_WdY5mU"]
 except Exception:
-    api_key = "YOUR_LOCAL_KEY_HERE" 
+    api_key = "AIzaSyAcYinj66KegJuvK14jCa1BEz2y_WdY5mU" 
 
-if not api_key or api_key == "YOUR_LOCAL_KEY_HERE":
+if not api_key or api_key == "AIzaSyAcYinj66KegJuvK14jCa1BEz2y_WdY5mU":
     st.warning("Please add 'GEMINI_API_KEY' to your Streamlit Secrets!")
 
 genai.configure(api_key=api_key)
@@ -97,3 +97,4 @@ if st.button("Generate My Siddha Plan"):
                 st.error(f"Error: {e}")
     else:
         st.error("API Key is missing. Check Streamlit Secrets.")
+
