@@ -76,3 +76,27 @@ if st.button("Generate My Siddha Plan"):
             st.success("Plan generated! 🕉️")
         except Exception as e:
             st.error(f"Error: {e}")
+            # 4. Generate Recommendation
+if st.button("Generate My Personalized Siddha Plan"):
+    if api_key and api_key != "PASTE_YOUR_ACTUAL_KEY_HERE":
+        with st.spinner("Consulting Siddha Wisdom..."):
+            # UPDATED PROMPT: Professional, supportive, and drives WhatsApp leads
+            prompt = f"""
+            Act as an expert Siddha Nutritionist for YogiEats. 
+            The user is {age} years old with a {body_type} body type. 
+            Goal: {goal}. Yoga Practitioner: {practitioner}.
+
+            1. Provide a detailed 1-day Sattvic meal plan (Breakfast, Lunch, Dinner).
+            2. Recommend ONE specific natural tool or herb (like a Copper Bottle or Triphala) specifically for their {body_type} type.
+            3. IMPORTANT: End the response with this exact text: 
+               'For a direct recommendation of the best organic brands and local suppliers in India, visit https://yogieats.in/resources and message me on WhatsApp!'
+            4. Keep the tone calm, professional, and encouraging.
+            """
+            
+            try:
+                response = model.generate_content(prompt)
+                st.markdown("### 🥗 Your Personalized YogiEats Plan")
+                st.write(response.text)
+                st.success("Your journey to wellness begins here. 🕉️")
+            except Exception as e:
+                st.error(f"Something went wrong: {e}")
